@@ -1,0 +1,16 @@
+<h1><%=@post.title%></h1>
+
+<a href="<%=edit_post_url(@post)%>">Edit This Post</a>
+<br>
+<%=@post.content%>
+<br>
+<%=@post.url%>
+<!-- TODO voting buttons -->
+<h3>Subs</h3>
+<ul>
+    <% @post.subs.each do |sub|%>
+    <li><a href="<%=sub_url(sub)%>"><%=sub.title%></a></li> 
+    <%end%>
+</ul> 
+
+<h2>Comments</h2>

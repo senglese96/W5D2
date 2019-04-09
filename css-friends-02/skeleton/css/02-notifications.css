@@ -1,0 +1,23 @@
+/* PHASE 2: Notifications */
+
+.drop-down-parent {
+    position: relative;
+    color: orange;
+}
+
+.badge {
+    display: none;
+    position: absolute;
+    top: 40px;
+}
+
+.drop-down-parent:hover + .badge, .badge:hover {
+    display: block;
+}
+
+.badge a {
+    display: inherit;
+    background-color: rgb(74, 68, 79);
+    z-index: 1;
+    border: 30px black;
+}

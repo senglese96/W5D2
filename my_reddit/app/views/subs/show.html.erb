@@ -1,0 +1,15 @@
+<h1><%= @sub.title %></h1>
+
+<p><%= @sub.description %></p>
+
+<a href="<%=new_post_url%>">Make a New Post!</a>
+<br>
+<ul>
+    <% @sub.posts.each do |post|%>
+    <li><a href="<%=post_url(post)%>"><%=post.title%></a></li> 
+    <%end%>
+</ul> 
+<!-- TODO add in comment and karma totals-->
+<br>
+<a href="<%= edit_sub_url(@sub) %>">Edit Sub</a>
+<p>Moderated by <%= @sub.moderator.username %></p>
