@@ -12,7 +12,7 @@
 #
 
 class Post < ApplicationRecord
-    validates :title, :subtags, :author_id, presence: true
+    validates :title, :author_id, presence: true
 
     has_many :subtags, dependent: :destroy
 
@@ -28,4 +28,15 @@ class Post < ApplicationRecord
 
     has_many :comments
 
+    def top_level_comments
+        self.comments.where(parent_comment_id: nil)
+    end
+
+    def comments_by_parent_id
+        comments = Hash.new { |h,k| h[k] = [] }
+        self.comments.each do |comment|
+            comments[comment.parent_comment_id] << comment
+        end
+        comments
+    end
 end

@@ -1,0 +1,8 @@
+
+
+<ul>
+    <% all_comments[parent_comment.id].each do |child| %>
+        <li><a href="<%=comment_url(child)%>"><%= child.content %></a></li>
+        <%= render 'comment_tree', parent_comment: child, all_comments: all_comments %>
+    <%end%>
+</ul>
