@@ -3887,3 +3887,821 @@ Processing by PostsController#show as HTML
 Completed 200 OK in 74ms (Views: 66.1ms | ActiveRecord: 1.7ms)
 
 
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3993435677584569720)[0m
+  ↳ bin/rails:9
+  [1m[35m (11.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateVotes (20190410000909)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (37.9ms)[0m  [1m[35mCREATE TABLE "votes" ("id" bigserial primary key, "value" integer NOT NULL, "votable_type" character varying, "votable_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190410000909_create_votes.rb:3
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_votable_type_and_votable_id" ON "votes"  ("votable_type", "votable_id")[0m
+  ↳ db/migrate/20190410000909_create_votes.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190410000909"]]
+  ↳ bin/rails:9
+  [1m[35m (12.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3993435677584569720)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/posts/1" for ::1 at 2019-04-09 17:32:04 -0700
+  [1m[35m (23.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/var/rbenv/versions/2.5.0/lib/ruby/gems/2.5.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (1.2ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.8ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (1.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (1.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.1ms)
+  Rendered posts/_comment_tree.html.erb (4.8ms)
+  Rendered posts/_comment_tree.html.erb (12.2ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.6ms)
+  Rendered posts/show.html.erb within layouts/application (125.7ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 522ms (Views: 344.1ms | ActiveRecord: 36.9ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:32:09 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"a2bZCCX3RMn/x9QbGYGFpct7UVKelzzrqyZRMSGk6Kw6Uq+obE7gYRR+Qidboe8KIyDpAMrQmSkmkRhUWLYzWw==", "post_id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/posts_controller.rb:41
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (5.8ms)
+Completed 500 Internal Server Error in 72ms (ActiveRecord: 5.3ms)
+
+
+
+NoMethodError - undefined method `title' for nil:NilClass:
+  app/views/posts/show.html.erb:1:in `_app_views_posts_show_html_erb__4011708198980681668_70113218394520'
+  app/controllers/posts_controller.rb:42:in `upvote'
+
+Started POST "/__better_errors/d153db842c14efb3/variables" for ::1 at 2019-04-09 17:32:10 -0700
+Started GET "/posts/1" for ::1 at 2019-04-09 17:32:35 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.8ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (2.2ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (3.1ms)
+  Rendered posts/_comment_tree.html.erb (6.0ms)
+  Rendered posts/_comment_tree.html.erb (13.3ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (3.1ms)
+  Rendered posts/show.html.erb within layouts/application (129.1ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 360ms (Views: 214.4ms | ActiveRecord: 27.5ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:32:37 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"wDc6WbB43RdXwD3NFklxfuco/cjAXxNg2Etcljetx+ORA0z5+cF5v7x5q/FUaRvRD3NFmpQYtqJV/BXzTr8cFA==", "post_id"=>"1"}
+Completed 404 Not Found in 4ms (ActiveRecord: 0.0ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Post without an ID:
+  app/controllers/posts_controller.rb:41:in `upvote'
+
+Started POST "/__better_errors/9a0d00070a0a96db/variables" for ::1 at 2019-04-09 17:32:38 -0700
+Started GET "/posts/1" for ::1 at 2019-04-09 17:33:01 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.9ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.7ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (0.8ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (1.9ms)
+  Rendered posts/_comment_tree.html.erb (3.8ms)
+  Rendered posts/_comment_tree.html.erb (10.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.5ms)
+  Rendered posts/show.html.erb within layouts/application (100.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 252ms (Views: 166.3ms | ActiveRecord: 27.2ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:33:03 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"xWle/jkRACKs9gMOZP/XJHJPrSVtImjNhm5WVbM/gJCUXShecKikikdPlTIm372LmhQVdzllzQ8L2R8wyi1bZw==", "post_id"=>"1"}
+  [1m[36mPost Load (0.9ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:42
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/posts_controller.rb:42
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 6.2ms)
+
+
+
+NameError - wrong constant name post:
+  app/controllers/posts_controller.rb:42:in `upvote'
+
+Started POST "/__better_errors/7ad68c10dfa9da10/variables" for ::1 at 2019-04-09 17:33:03 -0700
+Started GET "/posts/1" for ::1 at 2019-04-09 17:33:35 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.6ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (1.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.0ms)
+  Rendered posts/_comment_tree.html.erb (4.1ms)
+  Rendered posts/_comment_tree.html.erb (10.9ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.4ms)
+  Rendered posts/show.html.erb within layouts/application (100.7ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 285ms (Views: 184.1ms | ActiveRecord: 27.5ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:33:37 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"NBCdKeib4gvNDhWd1X+IsXXwCoUAF4vnvTNaG8VfHd1lJOuJoSJGoya3g6GXX+Ienauy11RQLiUwhBN+vE3GKg==", "post_id"=>"1"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:42
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:42
+  [1m[36mVote Create (27.7ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:33:37.042169"], ["updated_at", "2019-04-10 00:33:37.042169"]]
+  ↳ app/controllers/posts_controller.rb:42
+  [1m[35m (27.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:42
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.7ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/show.html.erb within layouts/application (7.4ms)
+Completed 500 Internal Server Error in 101ms (ActiveRecord: 62.1ms)
+
+
+
+NoMethodError - undefined method `[]' for nil:NilClass:
+  app/views/posts/show.html.erb:28:in `_app_views_posts_show_html_erb__4011708198980681668_70113214926460'
+  app/controllers/posts_controller.rb:43:in `upvote'
+
+Started POST "/__better_errors/223ba422d88a4e5e/variables" for ::1 at 2019-04-09 17:33:37 -0700
+Started GET "/posts/1" for ::1 at 2019-04-09 17:34:54 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (1.1ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (0.8ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.8ms)
+  Rendered posts/_comment_tree.html.erb (4.8ms)
+  Rendered posts/_comment_tree.html.erb (12.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.1ms)
+  Rendered posts/show.html.erb within layouts/application (101.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 305ms (Views: 214.4ms | ActiveRecord: 28.8ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:34:56 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"QAlGJed1kE6NWsBPO5MxwGpriLt8EasdPLZjMJcUeVIRPTCFrsw05mbjVnN5s1tvgjAw6ShWDt+xASpV7gaipQ==", "post_id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.7ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:34:56.800720"], ["updated_at", "2019-04-10 00:34:56.800720"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (1.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.0ms)
+  Rendered posts/_comment_tree.html.erb (4.3ms)
+  Rendered posts/_comment_tree.html.erb (10.7ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.3ms)
+  Rendered posts/show.html.erb within layouts/application (31.8ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 114ms (Views: 62.3ms | ActiveRecord: 16.7ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:34:59 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"HsSedmlXWEI1UhIhoW6SOLXOvZHzyW548Ba2jjCjRQhP8OjWIO786t7rhB3jTviXXZUFw6eOy7p9of/rSbGe/w==", "post_id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.5ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:34:59.460732"], ["updated_at", "2019-04-10 00:34:59.460732"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:20
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.8ms)
+  Rendered posts/_comment_tree.html.erb (6.2ms)
+  Rendered posts/_comment_tree.html.erb (14.5ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.0ms)
+  Rendered posts/show.html.erb within layouts/application (35.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 88ms (Views: 74.3ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/posts/1/upvote" for ::1 at 2019-04-09 17:37:41 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/posts/1/upvote"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/posts/1" for ::1 at 2019-04-09 17:38:04 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mSub Load (0.6ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.7ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (1.9ms)
+  Rendered posts/_comment_tree.html.erb (3.9ms)
+  Rendered posts/_comment_tree.html.erb (10.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.5ms)
+  Rendered posts/show.html.erb within layouts/application (42.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 176ms (Views: 166.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/posts/1" for ::1 at 2019-04-09 17:38:09 -0700
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:18
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.5ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (3.1ms)
+  Rendered posts/_comment_tree.html.erb (5.3ms)
+  Rendered posts/_comment_tree.html.erb (13.7ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (1.9ms)
+  Rendered posts/show.html.erb within layouts/application (50.6ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 132ms (Views: 120.0ms | ActiveRecord: 2.3ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:11 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"81YQTONjDPujf/6WZ/bC/JkQiExD9O6p9aeXf1l5U9qiYmbsqtqoU0jGaKol1qhTcUswHhezS2t4EN4aIGuILQ==", "post_id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.5ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:11.821040"], ["updated_at", "2019-04-10 00:38:11.821040"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.8ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.7ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.4ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.3ms)
+  Rendered posts/_comment_tree.html.erb (4.7ms)
+  Rendered posts/_comment_tree.html.erb (13.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.3ms)
+  Rendered posts/show.html.erb within layouts/application (38.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 132ms (Views: 118.7ms | ActiveRecord: 4.3ms)
+
+
+Started POST "/posts/1/downvote" for ::1 at 2019-04-09 17:38:12 -0700
+Processing by PostsController#downvote as HTML
+  Parameters: {"authenticity_token"=>"v7ZZxDcfgCyZLqvskqVbcbzKF1BcHGyuqDOw0e2ag9/ugi9kfqYkhHKXPdDQhTHeVJGvAghbyWwlhPm0lIhYKA==", "post_id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:48
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:50
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:50
+  [1m[36mVote Create (0.6ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", -1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:12.685320"], ["updated_at", "2019-04-10 00:38:12.685320"]]
+  ↳ app/controllers/posts_controller.rb:50
+  [1m[35m (13.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:50
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.5ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (1.9ms)
+  Rendered posts/_comment_tree.html.erb (3.7ms)
+  Rendered posts/_comment_tree.html.erb (9.4ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.1ms)
+  Rendered posts/show.html.erb within layouts/application (33.0ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 102ms (Views: 75.3ms | ActiveRecord: 16.8ms)
+
+
+Started POST "/posts/1/downvote" for ::1 at 2019-04-09 17:38:13 -0700
+Processing by PostsController#downvote as HTML
+  Parameters: {"authenticity_token"=>"s5/Gx1T204YSoQKt6azVa6zhMXQZcKNzNbOnT26+RYDiq7BnHU93LvkYlJGrjL/ERLqJJk03BrG4BO4qF6yedw==", "post_id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:48
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:50
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:50
+  [1m[36mVote Create (0.6ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", -1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:13.333723"], ["updated_at", "2019-04-10 00:38:13.333723"]]
+  ↳ app/controllers/posts_controller.rb:50
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:50
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.7ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (3.6ms)
+  Rendered posts/_comment_tree.html.erb (6.1ms)
+  Rendered posts/_comment_tree.html.erb (11.8ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.8ms)
+  Rendered posts/show.html.erb within layouts/application (38.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 95ms (Views: 79.7ms | ActiveRecord: 4.5ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:16 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"uwZIh46u7w4PLc8cim24ExCQDuXsx3fLu3oJEVVtyTPqMj4nxxdLpuSUWSDITdK8+Mu2t7iA0gk2zUB0LH8SxA==", "post_id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.7ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (1.4ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:16.261742"], ["updated_at", "2019-04-10 00:38:16.261742"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.5ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (1.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.3ms)
+  Rendered posts/_comment_tree.html.erb (4.6ms)
+  Rendered posts/_comment_tree.html.erb (11.3ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.0ms)
+  Rendered posts/show.html.erb within layouts/application (36.4ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 90ms (Views: 73.7ms | ActiveRecord: 5.4ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:16 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"Lxh/3AUb2Kdfkd2WKSH+2Od9f8b7ZaAC0yzNW8Z2lgZ+LAl8TKJ8D7QoS6prAZR3DybHlK8iBcBem4Q+v2RN8Q==", "post_id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.5ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:16.997253"], ["updated_at", "2019-04-10 00:38:16.997253"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.6ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.6ms)
+  Rendered posts/_comment_tree.html.erb (5.3ms)
+  Rendered posts/_comment_tree.html.erb (12.4ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.9ms)
+  Rendered posts/show.html.erb within layouts/application (37.4ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 95ms (Views: 80.7ms | ActiveRecord: 4.0ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:21 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"HNlW7dwngmPaLD+EVY/uEc1sMrqEsSRl457IKYWh7BZN7SBNlZ4myzGVqbgXr4S+JTeK6ND2gaduKYFM/LM34Q==", "post_id"=>"1"}
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.6ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:21.419877"], ["updated_at", "2019-04-10 00:38:21.419877"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.4ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.7ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (1.9ms)
+  Rendered posts/_comment_tree.html.erb (3.8ms)
+  Rendered posts/_comment_tree.html.erb (10.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.5ms)
+  Rendered posts/show.html.erb within layouts/application (35.8ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 87ms (Views: 71.6ms | ActiveRecord: 5.2ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:24 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"AF+YVJmvQ606T6/DNysZFTq7PLOHkfSh/srbeQZrhWJRa+700BbnBdH2Of91C3O60uCE4dPWUWNzfZIcf3lelQ==", "post_id"=>"1"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.3ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.6ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:24.036979"], ["updated_at", "2019-04-10 00:38:24.036979"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.6ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.0ms)
+  Rendered posts/_comment_tree.html.erb (4.1ms)
+  Rendered posts/_comment_tree.html.erb (12.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.8ms)
+  Rendered posts/show.html.erb within layouts/application (34.6ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 93ms (Views: 79.2ms | ActiveRecord: 4.5ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:24 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"LFFQH9a+sQqjGxYQThu75Bmu8Z4xILMlwk3tZLRJPLF9ZSa/nwcVokiigCwMO9FL8fVJzGVnFudP+qQBzVvnRg==", "post_id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.6ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:24.434538"], ["updated_at", "2019-04-10 00:38:24.434538"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.4ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (3.6ms)
+  Rendered posts/_comment_tree.html.erb (6.6ms)
+  Rendered posts/_comment_tree.html.erb (12.4ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.8ms)
+  Rendered posts/show.html.erb within layouts/application (36.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 94ms (Views: 81.1ms | ActiveRecord: 4.2ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:24 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"1Crhbpj9mGDgU3/oXzIdJiGoVTFACK92DwSuu7TEu6mFHpfO0UQ8yAvq6dQdEneJyfPtYxRPCrSCs+fezdZgXg==", "post_id"=>"1"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.8ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:24.743315"], ["updated_at", "2019-04-10 00:38:24.743315"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.6ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.7ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.5ms)
+  Rendered posts/_comment_tree.html.erb (6.3ms)
+  Rendered posts/_comment_tree.html.erb (15.8ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (3.0ms)
+  Rendered posts/show.html.erb within layouts/application (45.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 103ms (Views: 87.0ms | ActiveRecord: 4.7ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:25 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"/GM9hL/9IeekLoGB20ouQF/PR0qp2PHGCvHGoy11UbmtV0sk9kSFT0+XF72ZakTvt5T/GP2fVASHRo/GVGeKTg==", "post_id"=>"1"}
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.4ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.7ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:25.229170"], ["updated_at", "2019-04-10 00:38:25.229170"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.6ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.4ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (1.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.3ms)
+  Rendered posts/_comment_tree.html.erb (4.2ms)
+  Rendered posts/_comment_tree.html.erb (11.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (2.8ms)
+  Rendered posts/show.html.erb within layouts/application (35.5ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 93ms (Views: 78.0ms | ActiveRecord: 4.5ms)
+
+
+Started POST "/posts/1/upvote" for ::1 at 2019-04-09 17:38:25 -0700
+Processing by PostsController#upvote as HTML
+  Parameters: {"authenticity_token"=>"8/DHW45QLrbVNFhRLG6zq/y+VpasHE0Y2iPXZ6AmHnSixLH7x+mKHj6Nzm1uTtkEFOXuxPhb6NpXlJ4C2TTFgw==", "post_id"=>"1"}
+  [1m[36mPost Load (0.6ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:41
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/models/post.rb:39
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[36mVote Create (0.6ms)[0m  [1m[32mINSERT INTO "votes" ("value", "votable_type", "votable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["value", 1], ["votable_type", "Post"], ["votable_id", 1], ["created_at", "2019-04-10 00:38:25.765222"], ["updated_at", "2019-04-10 00:38:25.765222"]]
+  ↳ app/controllers/posts_controller.rb:43
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/posts_controller.rb:43
+  Rendering posts/show.html.erb within layouts/application
+  [1m[36mVote Load (0.5ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."votable_id" = $1 AND "votes"."votable_type" = $2[0m  [["votable_id", 1], ["votable_type", "Post"]]
+  ↳ app/views/posts/show.html.erb:9
+  [1m[36mSub Load (0.5ms)[0m  [1m[34mSELECT "subs".* FROM "subs" INNER JOIN "subtags" ON "subs"."id" = "subtags"."sub_id" WHERE "subtags"."post_id" = $1[0m  [["post_id", 1]]
+  ↳ app/views/posts/show.html.erb:22
+  Rendered posts/_comment_tree.html.erb (0.6ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.1ms)
+  Rendered posts/_comment_tree.html.erb (3.4ms)
+  Rendered posts/_comment_tree.html.erb (6.0ms)
+  Rendered posts/_comment_tree.html.erb (11.7ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (0.0ms)
+  Rendered posts/_comment_tree.html.erb (2.2ms)
+  Rendered posts/show.html.erb within layouts/application (37.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "eamhCXYH0kTEC7NDSC00GQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15
+Completed 200 OK in 98ms (Views: 83.3ms | ActiveRecord: 4.5ms)
+
+

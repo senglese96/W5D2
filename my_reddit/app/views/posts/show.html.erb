@@ -5,7 +5,18 @@
 <%=@post.content%>
 <br>
 <%=@post.url%>
-<!-- TODO voting buttons -->
+<br>
+<%= @post.votes.reduce(0) {|sum, vote| sum+= vote.value} %>
+<br>
+<form action="<%= post_upvote_url(@post)%>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    <input type="submit" value="Upvote">
+</form>
+<form action="<%= post_downvote_url(@post)%>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    <input type="submit" value="Downvote">
+</form>
+
 <h3>Subs</h3>
 <ul>
     <% @post.subs.each do |sub|%>
